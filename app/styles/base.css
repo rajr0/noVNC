@@ -654,6 +654,79 @@ select:active {
 }
 
 /* ----------------------------------------
+ * Loading Animation
+ * ----------------------------------------
+ */
+
+#noVNC_loading_anim {
+  transition: 0.5s ease-in-out;
+
+  transform: scale(0, 0);
+  visibility: hidden;
+  opacity: 0;
+
+  /* make sure this doesn't interfere with the positioning of the connect dialog */
+  position: absolute; 
+}
+#noVNC_loading_anim.noVNC_open {
+  transform: scale(1, 1);
+  visibility: visible;
+  opacity: 1;
+}
+#noVNC_loading_anim.noVNC_open > .noVNC_logo span:first-child {
+  animation-name: bounce;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.02, 0.87, 0.7, 1.52);
+  animation-fill-mode: forward;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10%);
+  }
+}
+
+/*
+@keyframes flips {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    25% {
+        transform: rotateY(180deg);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg);
+    }
+    75% {
+        transform: rotateX(180deg) rotateY(0deg);
+    }
+    100% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}*/
+#noVNC_loading_anim .noVNC_logo {
+  transition: 0.5s ease-in-out;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  font-size: 80px;
+  text-align: center;
+
+  border-radius: 5px;
+}
+@media (max-width: 440px) {
+  #noVNC_loading_anim {
+    max-width: calc(100vw - 100px);
+  }
+  #noVNC_loading_anim .noVNC_logo {
+    font-size: calc(25vw - 30px);
+  }
+}
+
+/* ----------------------------------------
  * Connect Dialog
  * ----------------------------------------
  */
@@ -837,7 +910,11 @@ select:active {
   line-height:90%;
   text-shadow: 0.1em 0.1em 0 black;
 }
-.noVNC_logo span{
+.noVNC_logo span {
+    margin: -1px; /* make sure it's the logo is on one line on small devices */
+    display: inline-block;
+}
+.noVNC_logo span:first-child {
   color:green;
 }
 

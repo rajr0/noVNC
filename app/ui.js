@@ -151,6 +151,9 @@ var UI;
             document.getElementById("noVNC_status")
                 .addEventListener('click', UI.hideStatus);
 
+            // hide the loading circle
+            UI.hideLoadingAnim();
+
             UI.openControlbar();
 
             // Show the connect panel on first load unless autoconnecting
@@ -1027,6 +1030,11 @@ var UI;
  * ==============
  *  CONNECTION
  * ------v------*/
+
+        hideLoadingAnim: function() {
+            document.getElementById('noVNC_loading_anim')
+                .classList.remove('noVNC_open');
+        },
 
         openConnectPanel: function() {
             document.getElementById('noVNC_connect_dlg')
